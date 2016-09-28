@@ -23,7 +23,7 @@ export default class VideoItem extends Component {
           <div className={'col-lg-6'}>
             <Title title={this.state.title} />
             <p>{this.state.description}</p>
-            <Comments data={this.state.id}/>
+            <Comments videoID={this.state.id}/>
           </div>
         </div>
       </div>

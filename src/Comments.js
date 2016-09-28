@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+
 export default class Comments extends Component {
   constructor(props){
     super(props);
     this.state = {
       commentsVisability: false,
-      videoID: this.props.data.id,
-      comments: []
+      videoID: this.props.videoID,
+      comments: JSON.parse(localStorage.getItem(`comm${this.props.videoID}`) || '[]')
     }
 
     this.toggleVisability = function(event) {
@@ -23,6 +24,8 @@ export default class Comments extends Component {
           header: 'Anonymous user',
           text: textareaValue
         })
+      }, () => {
+        localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
       });
     }.bind(this);
 
@@ -37,6 +40,8 @@ export default class Comments extends Component {
       currentList.splice(index, 1);
       this.setState({
         comments: currentList
+      }, () => {
+        localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
       });
     }.bind(this);
   }
@@ -83,6 +88,7 @@ export default class Comments extends Component {
         <a className='btn btn-default btn-toggleComments' onClick={this.toggleVisability} href='#'>
           {this.state.commentsVisability ? 'Hide comments ' : 'Show comments ' }
           <span className='glyphicon glyphicon-comment'></span>
+          <span className="badge">{this.state.comments.length}</span>
         </a>
         {commentsList}
         {addBlock}

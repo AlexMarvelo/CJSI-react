@@ -35,3 +35,7 @@ footer {
   top: 0;
   right: 0;
 }
+
+.btn-toggleComments .badge {
+  margin-left: 8px;
+}
