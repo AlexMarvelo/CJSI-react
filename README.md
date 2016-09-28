@@ -1,4 +1,4 @@
-# CJSI OMDb-react
+# CJSI-react
 Hometask for Ciklum JS Internship Lesson 7
 
 ---
