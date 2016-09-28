@@ -21,3 +21,17 @@ footer {
 .btn-addComment {
   width: 25%;
 }
+
+.addCommentForm {
+  margin-top: 15px;
+}
+
+.media-body {
+  position: relative;
+}
+
+.btn-removeComment {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

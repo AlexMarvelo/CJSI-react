@@ -5,13 +5,7 @@ export default class Comments extends Component {
     this.state = {
       commentsVisability: false,
       videoID: this.props.data.id,
-      comments: [
-        {
-          id: 1,
-          header: 'First comment header',
-          text: 'Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.'
-        }
-      ]
+      comments: []
     }
 
     this.toggleVisability = function(event) {
@@ -21,6 +15,29 @@ export default class Comments extends Component {
 
     this.addComment = function(event) {
       event.preventDefault();
+      if (!textareaValue.length) return;
+      let currentList = this.state.comments;
+      this.setState({
+        comments: currentList.concat({
+          id: currentList.length ? currentList[currentList.length-1].id + 1 : 1,
+          header: 'Anonymous user',
+          text: textareaValue
+        })
+      });
+    }.bind(this);
+
+    var textareaValue;
+    this.handleTextarea = function(event) {
+      textareaValue = event.target.value;
+    }
+
+    this.removeComment = function(event, index) {
+      event.preventDefault();
+      let currentList = this.state.comments;
+      currentList.splice(index, 1);
+      this.setState({
+        comments: currentList
+      });
     }.bind(this);
   }
 
@@ -35,21 +52,29 @@ export default class Comments extends Component {
           <div className='media-body'>
             <h4 className='media-heading'>{value.header}</h4>
             <p>{value.text}</p>
+            <a className='btn btn-removeComment' onClick={(event) => this.removeComment(event, index)} href='#'>
+              <span className='glyphicon glyphicon-remove'></span>
+            </a>
           </div>
         </div>
       )
     });
 
-    var addBtn, inputComment;
+    var addBlock;
     if (this.state.commentsVisability) {
-      addBtn = (
-        <a className='btn btn-primary btn-addComment' onClick={this.addComment} href='#'>
-          Add comment <span className='glyphicon glyphicon-pencil'></span>
-        </a>
-      )
+      addBlock = (
+        <form action='#' className='addCommentForm' onSubmit={this.addComment}>
+          <textarea
+            className="form-control comment-textarea"
+            placeholder='Type your comment here'
+            onChange={this.handleTextarea}
+            rows="2">
+          </textarea>
+          <a className='btn btn-primary btn-addComment' onClick={this.addComment} href='#'>
+            Add comment <span className='glyphicon glyphicon-pencil'></span>
+          </a>
+        </form>
 
-      inputComment = (
-        <textarea className="form-control comment-textarea" placeholder='Type your comment here' rows="2"></textarea>
       )
     };
 
@@ -60,7 +85,7 @@ export default class Comments extends Component {
           <span className='glyphicon glyphicon-comment'></span>
         </a>
         {commentsList}
-        {inputComment}{addBtn}
+        {addBlock}
       </div>
     )
   }
