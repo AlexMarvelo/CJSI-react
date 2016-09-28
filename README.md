@@ -6,6 +6,7 @@ Hometask for Ciklum JS Internship Lesson 7
 ##### List of used technologies:
 - React.js Library
 - webpack
+
 ---
 
 ##### To run the project locally, use:
