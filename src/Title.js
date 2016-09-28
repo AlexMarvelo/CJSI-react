@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 
-export default class App extends Component {
+export default class Title extends Component {
   render() {
-   const style = {
-    textAlign: 'center',
-    fontSize: 26,
-    margin: 10
-  }
-  return (
-    <div style={style}>{this.props.title}</div>
+    return (
+      <h2>{this.props.title}</h2>
     );
-}
+  }
 }

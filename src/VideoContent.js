@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-export default class App extends Component {
+export default class VideoContent extends Component {
   render() {
-    const video = {
-      margin: 10
-    }
-    return <div style={video}>
+    return <div className="videoContainer text-center">
         <iframe
           src={this.props.url}
           frameBorder="5"

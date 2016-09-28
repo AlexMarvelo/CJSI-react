@@ -1,0 +1,23 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "title": "Rock on",
+      "service": "vimeo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ante nunc, dapibus sit amet justo a, commodo fringilla odio. Curabitur venenatis aliquet scelerisque. In ac quam ac lorem tristique porttitor at ultrices est.",
+      "video": "https://player.vimeo.com/video/183482793"
+    }, {
+      "id": 2,
+      "title": "Common bastard....",
+      "service": "vimeo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ante nunc, dapibus sit amet justo a, commodo fringilla odio. Curabitur venenatis aliquet scelerisque. In ac quam ac lorem tristique porttitor at ultrices est.",
+      "video": "https://player.vimeo.com/video/148177148"
+    }, {
+      "id": 3,
+      "title": "Moving on",
+      "service": "vimeo",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ante nunc, dapibus sit amet justo a, commodo fringilla odio. Curabitur venenatis aliquet scelerisque. In ac quam ac lorem tristique porttitor at ultrices est.",
+      "video": "https://player.vimeo.com/video/151715092"
+    }
+  ]
+}
