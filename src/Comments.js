@@ -7,7 +7,7 @@ export default class Comments extends Component {
     this.state = {
       commentsVisability: false,
       videoID: this.props.videoID,
-      comments: global.window ? JSON.parse(window.localStorage.getItem(`comm${this.props.videoID}`) || '[]') : [],
+      comments: process.env.BROWSER ? JSON.parse(localStorage.getItem(`comm${this.props.videoID}`) || '[]') : [],
     }
 
     this.toggleVisability = function(event) {
@@ -26,8 +26,9 @@ export default class Comments extends Component {
           text: textareaValue
         })
       }, () => {
-        if (!global.window) return;
-        window.localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        if (process.env.BROWSER) {
+          localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        }
       });
     }.bind(this);
 
@@ -43,8 +44,9 @@ export default class Comments extends Component {
       this.setState({
         comments: currentList
       }, () => {
-        if (!global.window) return;
-        window.localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        if (!process.env.BROWSER) {
+          localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        }
       });
     }.bind(this);
   }

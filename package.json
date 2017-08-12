@@ -4,8 +4,9 @@
   "description": "Ciklum JS Internship Lesson 7",
   "scripts": {
     "build": "webpack --progress --colors",
-    "serve": "babel-node server.js --debug",
-    "start": "webpack --progress --colors && babel-node server.js"
+    "build-watch": "webpack --progress --colors --watch",
+    "serve": "babel-node server/index.js --debug",
+    "start": "webpack --progress --colors && babel-node server/index.js"
   },
   "repository": {
     "type": "git",

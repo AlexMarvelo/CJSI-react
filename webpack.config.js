@@ -14,7 +14,10 @@ var webpackConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new webpack.DefinePlugin({
+      'process.env.BROWSER': JSON.stringify(true),
+    }),
   ],
   module: {
     loaders: [

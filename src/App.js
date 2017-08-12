@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import VideoItem from './VideoItem';
 
-if (global.window) {
-	require('../node_modules/bootstrap/dist/css/bootstrap.css');
-	require('./css/1-col-portfolio.css');
+if (process.env.BROWSER) {
+  require('../node_modules/bootstrap/dist/css/bootstrap.css');
+  require('./css/1-col-portfolio.css');
 }
 
 
 export default class App extends Component {
+  componentWillMount() {
+    if (process.env.BROWSER) {
+      fetch('/videos')
+        .then(res => res.json())
+        .then(json => this.setState({ videos: json.videos }));
+    }
+  }
+
   constructor(props){
     super(props);
-    let inputData = require('./data/videos.json');
     this.state = {
-      videos: inputData.videos
-    }
+      videos: []
+    };
+    
   }
 
   render() {
