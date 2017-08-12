@@ -1,17 +1,30 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
-var compiler = webpack(config);
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import App from './src/App';
 
-var server = new WebpackDevServer(compiler, {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-});
 
-server.listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    return console.log(err);
-  }
-  console.log('Listening at http://localhost:3000/');
-});
+function handleRender(req, res) {
+  const html = ReactDOMServer.renderToString(<App />);
+  fs.readFile('./index.html', 'utf8', function (err, data) {
+    if (err) throw err;
+
+    // Inserts the rendered React HTML into our main div
+    const document = data.replace(/<div id='root'><\/div>/, `<div id="root">${html}</div>`);
+
+    // Sends the response back to the client
+    res.send(document);
+  });
+}
+
+const app = express();
+
+// Serve built files with static files middleware
+app.use('/build', express.static(path.join(__dirname, 'build')));
+
+// Serve requests with our handleRender function
+app.get('*', handleRender);
+
+app.listen(3000);

@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var webpackConfig = {
   devtool: 'eval',
-  entry: ['./src/index.js'],
+  entry: ['./src/index'],
   output: {
     path: path.resolve(__dirname, 'build'),
     publicPath: '/assets/',

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
+
 export default class Comments extends Component {
   constructor(props){
     super(props);
     this.state = {
       commentsVisability: false,
       videoID: this.props.videoID,
-      comments: JSON.parse(localStorage.getItem(`comm${this.props.videoID}`) || '[]')
+      comments: global.window ? JSON.parse(window.localStorage.getItem(`comm${this.props.videoID}`) || '[]') : [],
     }
 
     this.toggleVisability = function(event) {
@@ -25,7 +26,8 @@ export default class Comments extends Component {
           text: textareaValue
         })
       }, () => {
-        localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        if (!global.window) return;
+        window.localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
       });
     }.bind(this);
 
@@ -41,7 +43,8 @@ export default class Comments extends Component {
       this.setState({
         comments: currentList
       }, () => {
-        localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
+        if (!global.window) return;
+        window.localStorage.setItem(`comm${this.state.videoID}`, JSON.stringify(this.state.comments));
       });
     }.bind(this);
   }

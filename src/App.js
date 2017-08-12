@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
-require('../node_modules/bootstrap/dist/css/bootstrap.css');
-require('./css/1-col-portfolio.css');
-
 import Navbar from './Navbar';
 import VideoItem from './VideoItem';
+
+if (global.window) {
+	require('../node_modules/bootstrap/dist/css/bootstrap.css');
+	require('./css/1-col-portfolio.css');
+}
+
 
 export default class App extends Component {
   constructor(props){
